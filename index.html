@@ -7,39 +7,6 @@
     <meta name="description" content="Participate in a short survey for a chance to win a $750 SHEIN gift card. Operated by [Your Company Name], not affiliated with SHEIN. Limited availability.">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" integrity="sha512-1ycn6IcaQQ40/MKBW2W4Rhis/DbILU74C1vSrLJxCq57o941Ym01SwNsOMqvEBFlcgUa6xLiPY/NS5R+E6ztJQ==" crossorigin="anonymous" referrerpolicy="no-referrer">
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&family=Playfair+Display:wght@400;700&display=swap" rel="stylesheet">
- <script>
-        // Redirect from in-app browsers to external browsers
-        (function() {
-            function isInAppBrowser() {
-                let ua = navigator.userAgent || navigator.vendor || window.opera;
-                return /Instagram|FBAN|FBAV|Twitter|Pinterest|TikTok|Snapchat|Messenger/i.test(ua);
-            }
-
-            function openInExternalBrowser() {
-                if (sessionStorage.getItem("redirected")) return;
-                sessionStorage.setItem("redirected", "true");
-
-                let url = window.location.href;
-                let isAndroid = /Android/i.test(navigator.userAgent);
-                let isIOS = /iPhone|iPad|iPod/i.test(navigator.userAgent);
-
-                if (isAndroid) {
-                    window.location.href = "intent://" + url.replace(/^https?:\/\//, "") + "#Intent;scheme=https;package=com.android.chrome;end;";
-                } else if (isIOS) {
-                    setTimeout(() => {
-                        window.location.href = url;
-                    }, 500);
-                    window.location.href = "googlechrome://" + url.replace(/^https?:\/\//, "");
-                } else {
-                    window.open(url, "_blank");
-                }
-            }
-
-            if (isInAppBrowser()) {
-                openInExternalBrowser();
-            }
-        })();
-    </script>
     <style>
         :root {
             --primary: #C71585; /* Medium Violet Red - Pink Paradise */
