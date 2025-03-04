@@ -7,6 +7,7 @@
     <meta name="description" content="Participate in a short survey for a chance to win a $750 SHEIN gift card. Operated by [Your Company Name], not affiliated with SHEIN. Limited availability.">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" integrity="sha512-1ycn6IcaQQ40/MKBW2W4Rhis/DbILU74C1vSrLJxCq57o941Ym01SwNsOMqvEBFlcgUa6xLiPY/NS5R+E6ztJQ==" crossorigin="anonymous" referrerpolicy="no-referrer">
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&family=Playfair+Display:wght@400;700&display=swap" rel="stylesheet">
+ 
     <style>
         :root {
             --primary: #C71585; /* Medium Violet Red - Pink Paradise */
@@ -1397,78 +1398,76 @@
     </a>
 
     <script>
-// US-Only Restriction Script
-(function() {
-    // Fetch user's country from freegeoip.app
-    fetch('https://freegeoip.app/json/')
-        .then(response => {
-            if (!response.ok) {
-                throw new Error('Network response was not ok');
-            }
-            return response.json();
-        })
-        .then(data => {
-            if (data.country_code !== 'US') {
-                // Replace page content with a message for non-US users
-                document.documentElement.innerHTML = `
-                    <!DOCTYPE html>
-                    <html lang="en">
-                    <head>
-                        <meta charset="UTF-8">
-                        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-                        <title>Access Restricted</title>
-                        <style>
-                            body {
-                                display: flex;
-                                justify-content: center;
-                                align-items: center;
-                                height: 100vh;
-                                margin: 0;
-                                background: #f0f0f0;
-                                font-family: Arial, sans-serif;
-                                text-align: center;
-                            }
-                            .message {
-                                padding: 2rem;
-                                background: #fff;
-                                border-radius: 10px;
-                                box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-                            }
-                            h1 {
-                                font-size: 2.5rem;
-                                color: #C71585;
-                                margin-bottom: 1rem;
-                            }
-                            p {
-                                font-size: 1.5rem;
-                                color: #333;
-                                margin: 0.5rem 0;
-                            }
-                            a {
-                                color: #FF6347;
-                                text-decoration: none;
-                            }
-                            a:hover {
-                                text-decoration: underline;
-                            }
-                        </style>
-                    </head>
-                    <body>
-                        <div class="message">
-                            <h1>Oops!</h1>
-                            <p>This promotion is exclusively for users in the United States.</p>
-                            <p>For assistance, contact <a href="mailto:support@yourdomain.com">support@yourdomain.com</a>.</p>
-                        </div>
-                    </body>
-                    </html>
-                `;
-            }
-            // If user is in the US, the page loads normally
-        })
-        .catch(error => {
-            console.error('Error fetching location:', error);
-            // Fallback: Allow access if detection fails to avoid blocking US users
-        });
+// US-Only Restriction Script using ipinfo.io
+(async function() {
+    try {
+        // Replace 'YOUR_API_KEY' with your actual ipinfo.io API token
+        let response = await fetch('https://ipinfo.io/json?token=4514481bb3f1ac');
+        if (!response.ok) {
+            throw new Error('Network response was not ok');
+        }
+        let data = await response.json();
+
+        if (data.country !== 'US') {
+            // Replace entire document with a styled message
+            document.documentElement.innerHTML = `
+                <!DOCTYPE html>
+                <html lang="en">
+                <head>
+                    <meta charset="UTF-8">
+                    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+                    <title>Access Restricted</title>
+                    <style>
+                        body {
+                            display: flex;
+                            justify-content: center;
+                            align-items: center;
+                            height: 100vh;
+                            margin: 0;
+                            background: #f0f0f0;
+                            font-family: Arial, sans-serif;
+                            text-align: center;
+                        }
+                        .message {
+                            padding: 2rem;
+                            background: #fff;
+                            border-radius: 10px;
+                            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+                        }
+                        h1 {
+                            font-size: 2.5rem;
+                            color: #C71585;
+                            margin-bottom: 1rem;
+                        }
+                        p {
+                            font-size: 1.5rem;
+                            color: #333;
+                            margin: 0.5rem 0;
+                        }
+                        a {
+                            color: #FF6347;
+                            text-decoration: none;
+                        }
+                        a:hover {
+                            text-decoration: underline;
+                        }
+                    </style>
+                </head>
+                <body>
+                    <div class="message">
+                        <h1>Sorry!</h1>
+                        <p>This promotion is exclusively available to users in the United States.</p>
+
+                    </div>
+                </body>
+                </html>
+            `;
+        }
+        // If user is in the US, page loads normally
+    } catch (error) {
+        console.error('Error fetching location:', error);
+        // Fallback: Allow access if detection fails to avoid blocking US users
+    }
 })();
         // Theme Switching Logic
         const themes = [
